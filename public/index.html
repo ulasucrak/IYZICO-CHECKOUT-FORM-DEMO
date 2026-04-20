@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dijital Danışmanlık</title>
+</head>
+
+<body>
+
+    <h1>Dijital Danışmanlık Paketi</h1>
+    <p>₺10,00</p>
+
+    <form id="odeme-formu">
+
+        <label>Ad</label>
+        <input id="name" type="text" placeholder="Adınız">
+
+        <label>Soyad</label>
+        <input id="surname" type="text" placeholder="Soyadınız">
+
+        <label>E-posta</label>
+        <input id="email" type="email" placeholder="mail@ornek.com">
+
+        <button type="button" onclick="odemeBaslat()">Satın Al</button>
+
+    </form>
+
+    <div id="iyzico-container"></div>
+
+    <script>
+        async function odemeBaslat() {
+            const veri = {
+                name: document.getElementById('name').value,
+                surname: document.getElementById('surname').value,
+                email: document.getElementById('email').value,
+            };
+
+            const cevap = await fetch('/api/start-payment', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(veri),
+            });
+
+            const sonuc = await cevap.json();
+
+            if (sonuc.success) {
+                document.getElementById('iyzico-container').innerHTML = sonuc.checkoutFormContent;
+            } else {
+                alert(sonuc.error);
+            }
+        }
+    </script>
+
+</body>
+
+</html>
