@@ -45,7 +45,14 @@
             const sonuc = await cevap.json();
 
             if (sonuc.success) {
-                document.getElementById('iyzico-container').innerHTML = sonuc.checkoutFormContent;
+                const temp = document.createElement('div');
+                temp.innerHTML = sonuc.checkoutFormContent;
+                const scriptTag = temp.querySelector('script');
+
+                const newScript = document.createElement('script');
+                newScript.type = 'text/javascript';
+                newScript.text = scriptTag.textContent;
+                document.head.appendChild(newScript);
             } else {
                 alert(sonuc.error);
             }
