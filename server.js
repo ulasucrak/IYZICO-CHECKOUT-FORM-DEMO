@@ -80,6 +80,27 @@ app.post('/api/start-payment', (req, res) => {
     });
 });
 
+app.post('/api/verify-payment', (req, res) => {
+    const token = req.body.token;
+
+    console.log('Callback geldi, token:', token);
+
+    iyzipay.checkoutForm.retrieve({
+        locale: Iyzipay.LOCALE.TR,
+        conversationId: 'conv-verify',
+        token: token,
+    }, (err, result) => {
+        if (err) {
+            return res.redirect('/result.html?status=error');
+        }
+        if (result.paymentStatus === 'SUCCESS') {
+            return res.redirect('/result.html?status=success');
+        } else {
+            return res.redirect('/result.html?status=error');
+        }
+    });
+});
+
 app.listen(process.env.PORT, () => {
     console.log(`Server is running on port ${process.env.PORT}`);
 });
