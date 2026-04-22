@@ -25,7 +25,7 @@ app.post('/api/start-payment', (req, res) => {
         currency: Iyzipay.CURRENCY.TRY,
         basketId: 'B67832',
         paymentGroup: Iyzipay.PAYMENT_GROUP.PRODUCT,
-        callbackUrl: 'http://localhost:3000/api/verify-payment',
+        callbackUrl: 'https://iyzico-checkout-form-demo-production.up.railway.app/api/verify-payment',
 
         buyer: {
             id: 'BY789',
