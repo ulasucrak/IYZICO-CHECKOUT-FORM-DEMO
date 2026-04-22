@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sonuç</title>
+</head>
+
+<body>
+    <div id="icerik"></div>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const status = params.get('status');
+        const el = document.getElementById('icerik');
+
+        if (status === 'success') {
+            el.innerHTML = '<h1>✅ Ödeme Başarılı!</h1><p>Dijital Danışmanlık Paketi satın alındı.</p><a href="/">← Geri dön</a>';
+        } else {
+            el.innerHTML = '<h1>❌ Ödeme Başarısız</h1><p>Bir hata oluştu, lütfen tekrar deneyin.</p><a href="/">← Geri dön</a>';
+        }
+    </script>
+</body>
+
+</html>
